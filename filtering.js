@@ -30,10 +30,28 @@ function translateKey() {
   currentCity = parsedKey[2];
 }
 
+function readForm() {
+  var form = document.getElementById("myForm");
+  var inputs = form.getElementsByTagName("input");
+  var hashTable = {};
+
+  for (var i = 0; i < inputs.length; i++) {
+    var input = inputs[i];
+    if (input.type !== "button") {
+      // Ignore the button input
+      var id = input.id;
+      var value = input.value;
+      hashTable[id] = value;
+    }
+  }
+
+  console.log(hashTable); // For demonstration, log the hash table to the console
+}
+
 /**Only shows cemeteries as close to key as possible
 Filters from State, then County, then City
-If one part of the key was missing, filtering will NOT continue
-Remember: State contains County, which contains city. Keys with just "-County-City" or "State--City" wouldn't reasonably exist.
+If one part of the key was missing, filtering will NOT display the cemetery
+Remember: State contains County, which contains City. Keys with just "_County_City" or "State__City" wouldn't reasonably exist.
 Being strict also accounts for States whose names equal cities  **/
 
 function filterCemeteriesByKey() {
@@ -50,15 +68,18 @@ function filterCemeteriesByKey() {
     // Select all div elements within the parent element
     let allDivs = cemetery.querySelectorAll("div");
 
-    // Filter the divs to get only those whose class name starts with "key"
-    let keyDiv = Array.from(allDivs).filter((div) => {
+    let keyDivs = Array.from(allDivs).filter((div) => {
       return Array.from(div.classList).some((className) =>
-        className.startsWith("key")
+        className.startsWith("key-")
       );
-    }); //end of key loop
+    });
 
-    cemeteryKey = keyDiv[0].className.trim().toLowerCase(); //Store the key (className of the needed Div)
-    console.log("cemeteryKey", cemeteryKey);
+    // Filter the div to get only those whose class name starts with "key-"
+    //CMS collection list items have "key-" in their class names in order to collect all keys, AND not make unique id values with keys.
+    cemeteryKey = keyDivs[0].className.trim().toLowerCase().slice(4);
+
+    console.log("currentKey = ", currentKey);
+    console.log("cemeteryKey = ", cemeteryKey);
 
     if (cemeteryKey !== currentKey) {
       cemetery.style.display = "none";
