@@ -1,0 +1,36 @@
+<!--Form Embed-->
+<div style="display: flex">
+  <form id="searchQuery">
+    <label for="state">State</label>
+    <input type="text" id="state" name="state" placeholder="State" />
+
+    <label for="county">County</label>
+    <input type="text" id="county" name="county" placeholder="County" />
+
+    <label for="city">City</label>
+    <input type="text" id="city" name="city" placeholder="City" />
+
+    <input type="button" value="Search" onclick="readForm()" />
+  </form>
+</div>
+
+<!--Form Reading Script-->
+<script>
+  function readForm() {
+    var form = document.getElementById("searchQuery");
+    var inputs = form.getElementsByTagName("input");
+    var hashTable = {};
+
+    for (var i = 0; i < inputs.length; i++) {
+      var input = inputs[i];
+      if (input.type !== "button") {
+        // Ignore the button input
+        var id = input.id;
+        var value = input.value;
+        hashTable[id] = value;
+      }
+    }
+
+    console.log(hashTable); // For demonstration, log the hash table to the console
+  }
+</script>
