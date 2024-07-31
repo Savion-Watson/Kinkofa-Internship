@@ -1,0 +1,27 @@
+<div class="cemetery-item">
+  <a href='/black-cemeteries-seo/{{wf {"path":"slug","type":"PlainText"\} }}'>
+    {{wf
+    {&quot;path&quot;:&quot;name&quot;,&quot;type&quot;:&quot;PlainText&quot;\}
+    }}
+  </a>
+  <!--Fields must have no spaces or characters around them-->
+  <div style="display: none" class="cemetery-state">
+    {{wf
+    {&quot;path&quot;:&quot;state&quot;,&quot;type&quot;:&quot;PlainText&quot;\}
+    }}
+  </div>
+  <div style="display: none" class="cemetery-county">
+    {{wf
+    {&quot;path&quot;:&quot;county&quot;,&quot;type&quot;:&quot;PlainText&quot;\}
+    }}
+  </div>
+  <div style="display: none" class="cemetery-city">
+    {{wf
+    {&quot;path&quot;:&quot;city&quot;,&quot;type&quot;:&quot;PlainText&quot;\}
+    }}
+  </div>
+  <div
+    style="display: none"
+    class='key-{{wf {"path":"state","type":"PlainText"\} }}_{{wf {"path":"county","type":"PlainText"\} }}_{{wf {"path":"city","type":"PlainText"\} }}'
+  ></div>
+</div>

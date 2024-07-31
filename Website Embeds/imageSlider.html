@@ -1,0 +1,13 @@
+<!--change id depending on slider position "slide-#"-->
+<img
+  id="slide-1"
+  src=""
+  alt='additional image for {{wf {"path":"name","type":"PlainText"\} }}'
+/>
+
+<script>
+  //Wait until entire pages loads so end of <body> script can appear
+  document.addEventListener("DOMContentLoaded", function () {
+    findAdditionalImage(1); //Change value depending on id: slide-#
+  });
+</script>

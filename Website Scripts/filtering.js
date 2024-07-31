@@ -1,4 +1,8 @@
-//Filtering Code from Savion
+//Code from Savion
+//GLOBAL level
+let currentState;
+let currentCounty;
+let currentCity;
 let currentKey;
 
 // Function to get the current cemetery's key
@@ -13,6 +17,17 @@ function getCurrentKey() {
     console.error("Current cemetery key not found");
     return null;
   }
+}
+
+function translateKey() {
+  let parsedKey = currentKey.split("_");
+  if (parsedKey == "__") {
+    console.error("current key is contains no information:", parsedKey);
+    return;
+  }
+  currentState = parsedKey[0];
+  currentCounty = parsedKey[1];
+  currentCity = parsedKey[2];
 }
 
 function readForm() {
@@ -33,30 +48,11 @@ function readForm() {
   console.log(hashTable); // For demonstration, log the hash table to the console
 }
 
-function matchKeys(baseKey, testKey) {
-  /**Allows approximate matches with specific keys to also appear in the search
-   * Ex: a baseKey of "texas_gonzales_" will show matches for "texas_gonzales_" and "texas_gonzales_harwood"
-   * The more specific a key is, the more specific the search
-   * Exact matches with incomplete keys are no longer made.
-   */
-
-  // Escape any special characters in the baseKey for regex
-  var escapedPattern = baseKey.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
-
-  // Create a regex pattern that matches the baseKey followed by optional word characters and dashes
-  var regex = new RegExp("^" + escapedPattern + "[\\w\\s_]*$");
-
-  console.log(regex.test(testKey));
-
-  // Test the testString against the regex
-  return regex.test(testKey);
-}
-
 /**Only shows cemeteries as close to key as possible
-  Filters from State, then County, then City
-  If one part of the key was missing, filtering will NOT display the cemetery
-  Remember: State contains County, which contains City. Keys with just "_County_City" or "State__City" wouldn't reasonably exist.
-  Being strict also accounts for States whose names equal cities  **/
+Filters from State, then County, then City
+If one part of the key was missing, filtering will NOT display the cemetery
+Remember: State contains County, which contains City. Keys with just "_County_City" or "State__City" wouldn't reasonably exist.
+Being strict also accounts for States whose names equal cities  **/
 
 function filterCemeteriesByKey() {
   console.log("Filtering cemeteries by key");
@@ -82,20 +78,24 @@ function filterCemeteriesByKey() {
     //CMS collection list items have "key-" in their class names in order to collect all keys, AND not make unique id values with keys.
     cemeteryKey = keyDivs[0].className.trim().toLowerCase().slice(4);
 
-    //console.log("currentKey = ", currentKey);
-    //console.log("cemeteryKey = ", cemeteryKey);
+    console.log("currentKey = ", currentKey);
+    console.log("cemeteryKey = ", cemeteryKey);
 
-    if (matchKeys(currentKey, cemeteryKey) == false) {
-      //console.log("Hiding cemetery with key:", cemeteryKey);
-      cemetery.remove(); //Remove element from the DOM entirely
+    if (cemeteryKey !== currentKey) {
+      cemetery.style.display = "none";
+      console.log("Hiding cemetery with key:", cemeteryKey);
     } else {
-      //cemtery is shown
+      cemetery.style.display = "block";
+      console.log("Showing cemetery with county:", cemeteryKey);
     }
   }); //end of cemetery loop
 }
 
 //*MAIN*//
-currentKey = getCurrentKey(); //Retrieve the key for the cemetery respective to the page
+
+currentKey = getCurrentKey();
+
+translateKey(); //Get key representing cemetery information
 
 // Wait for the document to be fully loaded before running the filter function
 document.addEventListener("DOMContentLoaded", function () {
