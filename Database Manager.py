@@ -1,11 +1,10 @@
 import csv
 from collections import defaultdict
 
-
-
 # Rules for .csv files 
 '''
-- Every entry has at least a Cemetery and a State.
+- Every entry has at least a Cemetery and a State. 
+- Put items in alphbetical order by State BEFORE running the script
 - Import files into Webflow the following order 
     1) Final Cemeteries
     2) city_cemetery 
@@ -71,8 +70,8 @@ with open(input_file, mode='r', newline='', encoding='utf-8') as infile:
         Cemetery = row['Cemetery Name']
 
         # Populate dictionaries
-        
         state_county_dict[State].add(County) 
+        
         # Check if a cemetery only has a State, if so, add to "Exclusive Cemeteries" 
         if (County == ''): 
             state_exclusive_dict[State].add(Cemetery)
@@ -144,6 +143,12 @@ for value in processing_dict:
 
 # NOTE: Webflow seperates different CMS references by semicolons: ' ; '
 
+def slugFormat(text): 
+    if (not text): 
+        return 'blank'.replace(' ','_').lower()
+    
+    return text.replace(' ','_').lower()
+
 def make_State_County():
 
     state_county_dict = defaultdict(set)
@@ -165,7 +170,8 @@ def make_County_City():
     county_city_dict = defaultdict(set)
     for entry in processing_dict:
         county = entry['County']
-        city = entry['City']
+        city = entry['City'] 
+        state = entry['State'] # Included in order to make proper breadcrumbs and slugs
         county_city_dict[county].add(city) 
 
     # Write State, County CSV
@@ -173,7 +179,11 @@ def make_County_City():
         writer = csv.writer(outfile)
         writer.writerow(['County', 'City'])
         for county, cities in county_city_dict.items():
-            writer.writerow([county, '; '.join( map(str, sorted(cities) ) )]) #.join() and .map() ensure clean separation
+            # Check if parameters are not blank strings...?
+            slugText = ""
+            # Make slugs for each entry
+            slugText = (slugFormat(county)+'-'+slugFormat(state)) # May not be getting the correct state at runtime
+            writer.writerow([county,'; '.join( map(str, sorted(cities) ) ) ])  #.join() and .map() ensure clean separation
 
 
 def make_City_Cemtery():
@@ -184,13 +194,20 @@ def make_City_Cemtery():
         cemetery = entry['Cemeteries'] 
         
         for value in cemetery:
+            county = entry['County']
+            city = entry['City'] # Included in order to make proper breadcrumbs and slugs
+            state = entry['State'] # Included in order to make proper breadcrumbs and slugs
             city_cemetery_dict[city].add(value) 
 
     # Write State, County CSV
     with open(city_cemetery_file, mode='w', newline='', encoding='utf-8') as outfile:
         writer = csv.writer(outfile)
         writer.writerow(['City', 'Cemetery'])
-        for city, cemeteries in city_cemetery_dict.items():
+        for city, cemeteries in city_cemetery_dict.items(): 
+            # Check if parameters are not blank strings...?
+            slugText = ""  
+            slugText = (slugFormat(city) + '-' + slugFormat(county) + '-' + slugFormat(state) )  # May not be getting the correct county at runtime
+            
             writer.writerow([city, '; '.join(map(str, sorted(cemeteries)) )]) #.join() and .map() ensure clean separation
 
 make_State_County() 
