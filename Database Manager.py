@@ -189,7 +189,7 @@ def make_City_Cemtery():
     # Write State, County CSV
     with open(city_cemetery_file, mode='w', newline='', encoding='utf-8') as outfile:
         writer = csv.writer(outfile)
-        writer.writerow(['City', 'Cemetery Name'])
+        writer.writerow(['City', 'Cemetery'])
         for city, cemeteries in city_cemetery_dict.items():
             writer.writerow([city, '; '.join(map(str, sorted(cemeteries)) )]) #.join() and .map() ensure clean separation
 
