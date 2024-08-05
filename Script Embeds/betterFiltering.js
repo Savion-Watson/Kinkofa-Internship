@@ -144,3 +144,5 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM fully loaded, running filterCemeteriesByKey");
   filterCemeteriesByKey();
 });
+
+export { currentKey, getCurrentKey, translateKey, getSelectiveKey };

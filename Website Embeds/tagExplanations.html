@@ -1,5 +1,4 @@
 <script>
-  //Script should be placed in <head> tag so body elements can find it
   function changeColor(givenElement, color) {
     //Webflow embeds are nested within existing HTML for the element
     givenElement.parentElement.style.backgroundColor = `${color}`;
@@ -56,6 +55,10 @@
   }
 
   function Main() {
+    //*MAIN*//
+    currentKey = getCurrentKey(); //Retrieve the key for the cemetery respective to the page
+    translateKey(); //Put respective values in globals
+
     // Wait for the document to be fully loaded before running functions
     document.addEventListener("DOMContentLoaded", function () {
       applyTagColor();

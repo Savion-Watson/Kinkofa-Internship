@@ -140,15 +140,16 @@
     }); //end of cemetery loop
   }
 
-  //*MAIN*//
-  currentKey = getCurrentKey(); //Retrieve the key for the cemetery respective to the page
-  translateKey(); //Put respective values in globals
-  // Wait for the document to be fully loaded before running the filter function
-  document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOM fully loaded, running filterCemeteriesByKey");
-    filterCemeteriesByKey();
-  });
+  function setLinks() {
+    //ids to change
+    const stateLink = document.getElementById("state-link");
+    const countyLink = document.getElementById("county-link");
+    const cityLink = document.getElementById("city-link");
 
+    const baseURL = "https://kinkofa-2024.webflow.io/";
+
+    //County and city urls should still have states to ensure the right page is reached
+  }
   function findAdditionalImage(num) {
     let slideNum = document.getElementById(`slide-${num}`); //change depending on slider position "slide-#"
     let images =
@@ -161,4 +162,76 @@
     console.log("imageURL", imageURL);
     slideNum.src = images[parseInt(slideNum.id.slice(-1)) - 1];
   }
+
+  function changeColor(givenElement, color) {
+    //Webflow embeds are nested within existing HTML for the element
+    givenElement.parentElement.style.backgroundColor = `${color}`;
+  }
+
+  function applyTagColor() {
+    var good = "#C0E0DA";
+    var moderate = "#FEF0D4";
+    var bad = "#fdb3b3";
+    var neutral = "#d0d0d0";
+
+    // Get all elements in the document
+    const allElements = document.querySelectorAll("*");
+
+    // Regular expression to match the "tag-[word]" convention for IDs
+    const idConvention = /^tag-\w+$/;
+
+    // Filter elements that match the convention
+    const tagElements = Array.from(allElements).filter((element) => {
+      return idConvention.test(element.id);
+    });
+
+    console.log(tagElements);
+
+    tagElements.forEach((tag) => {
+      var value = tag.innerHTML.toLowerCase().trim();
+      console.log(value);
+      switch (value) {
+        case "well-maintained":
+        case "active":
+        case "restored":
+          changeColor(tag, good);
+          break;
+
+        case "fair":
+        case "inactive":
+        case "undergoing_restoration":
+          changeColor(tag, yellow);
+          break;
+
+        case "neglected":
+        case "closed":
+        case "under_threat":
+          changeColor(tag, bad);
+          break;
+
+        case "unknown":
+        case "disused":
+        case "lost":
+          changeColor(tag, neutral);
+          break;
+
+        default:
+          changeColor(tag, "#ffffff"); // Example default color (white)
+          console.log("Status not recognized");
+      }
+    });
+  }
+
+  function Main() {
+    //*MAIN*//
+    currentKey = getCurrentKey(); //Retrieve the key for the cemetery respective to the page
+    translateKey(); //Put respective values in globals
+
+    // Wait for the document to be fully loaded before running functions
+    document.addEventListener("DOMContentLoaded", function () {
+      applyTagColor();
+    });
+  }
+
+  Main();
 </script>

@@ -15,11 +15,12 @@ let currentState;
 let currentCounty;
 let currentCity;
 
-function getLocationInfo() {
+function getLocationInfo(reverse = false) {
   //Get all cemeteries with appropriate class name
   const cemetery = document.querySelector(".location-desc");
   const idealText = cemetery.innerHTML; //Copy the first one's inner HTML
   console.log("idealText ", idealText);
+  var textDisplay;
 
   locationInfo = idealText.split(", ");
   currentState = locationInfo[0];
@@ -27,8 +28,17 @@ function getLocationInfo() {
   if ((locationInfo.length = 3)) {
     currentCity = locationInfo[2];
   }
+
+  currentCounty = currentCounty += " County";
+
+  if (reverse) {
+    textDisplay = currentCity + ", " + currentCounty + ", " + currentState;
+  } else {
+    textDisplay = currentState + ", " + currentCounty + ", " + currentCity;
+  }
+
   const elementToChange = document.querySelector(".seo-location-heading"); //Double check capitilization and spaces
-  elementToChange.innerHTML = "Cemeteries in " + idealText; //Change code imbed HTML
+  elementToChange.innerHTML = "Cemeteries in " + textDisplay; //Change code imbed HTML
 }
 
 function setBreadcrumbs() {
@@ -37,6 +47,6 @@ function setBreadcrumbs() {
 
 //Run script when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
-  getLocationInfo();
+  getLocationInfo(true);
   setBreadcrumbs();
 });

@@ -10,5 +10,3 @@ function findAdditionalImage(num) {
   console.log("imageURL", imageURL);
   slideNum.src = images[parseInt(slideNum.id.slice(-1)) - 1];
 }
-
-findAdditionalImage(1);
