@@ -1,5 +1,6 @@
 // Used in individualCemetery.html and tagExplanations.html
 
+//Script should be placed in <head> tag so body elements can find it
 function changeColor(givenElement, color) {
   //Webflow embeds are nested within existing HTML for the element
   givenElement.parentElement.style.backgroundColor = `${color}`;
@@ -30,31 +31,38 @@ function applyTagColor() {
     switch (value) {
       case "well-maintained":
       case "active":
+      case "restored":
         changeColor(tag, good);
         break;
 
       case "fair":
       case "inactive":
-        changeColor(tag, yellow);
+      case "vandalized":
+      case "overgrown":
+      case "under development":
+        changeColor(tag, moderate);
         break;
 
       case "neglected":
       case "closed":
+      case "threatened":
+      case "lost":
+      case "damaged":
+      case "under threat":
         changeColor(tag, bad);
         break;
 
-      case "unknown":
-      case "disused":
-        changeColor(tag, neutral);
-        break;
-
       default:
-        changeColor(tag, "#ffffff"); // Example default color (white)
-        console.log("Status not recognized");
+        changeColor(tag, neutral);
     }
   });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  applyTagColor();
-});
+function Main() {
+  // Wait for the document to be fully loaded before running functions
+  document.addEventListener("DOMContentLoaded", function () {
+    applyTagColor();
+  });
+}
+
+Main();
