@@ -4,7 +4,8 @@ from collections import defaultdict
 # Rules for .csv files 
 '''
 - Every entry has at least a Cemetery and a State. 
-- Put items in alphbetical order by State BEFORE running the script
+- Put items in alphbetical order by State BEFORE running the script 
+- (Ideally) delete old data before imports. This will prevent Webflow rejections due to relational data
 - Import files into Webflow the following order 
     1) Final Cemeteries
     2) city_cemetery 
@@ -27,7 +28,9 @@ from collections import defaultdict
 # NOTE: Empty values might need to default to _ or '_blank_', as Webflow filters do not accept empty text
 
 # Define file paths 
-input_file = 'Testing Data\Final TX Cemeteries.csv' #Change names
+# All names must match exactly (case-sensitive) 
+# Change names or paths as needed
+input_file = 'Testing Data\Final TX Cemeteries.csv' 
 state_county_file = 'Resulting Data\state_county.csv'
 county_city_file = 'Resulting Data\county_city.csv'
 city_cemetery_file = 'Resulting Data\city_cemetery.csv'
@@ -41,6 +44,7 @@ city_cemetery_dict = defaultdict(set)
 state_exclusive_dict = defaultdict(set)
 county_exclusive_dict = defaultdict(set)
 
+#De-Facto Data
 category_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(set)))  
 
 
@@ -109,7 +113,7 @@ processing_dict = list(flatten_dict(category_dict)) #Flattened dictionary for ea
             - Cemetery 
             - Cemetery'''
 
-def oldWriting(): #Has the possibility to put many combinations of non-respective data in the same cell (BAD)
+def oldWriting(): # Has the possibility to put many combinations of non-respective data in the same cell (BAD)
     # Write State, County CSV
     with open(state_county_file, mode='w', newline='', encoding='utf-8') as outfile:
         writer = csv.writer(outfile)
@@ -135,7 +139,7 @@ def oldWriting(): #Has the possibility to put many combinations of non-respectiv
             writer.writerow([city, '; '.join(sorted(cemeteries))]) 
 
 
-
+# Debug Printout
 for value in processing_dict: 
     print(value)
 
@@ -149,7 +153,7 @@ def slugFormat(text):
     
     return text.replace(' ','_').lower()
 
-def make_State_County():
+def make_State_County(): # makes state_county file
 
     state_county_dict = defaultdict(set)
     for entry in processing_dict:
@@ -165,7 +169,7 @@ def make_State_County():
             writer.writerow([state, '; '.join( map(str, sorted(counties)) )]) #.join() and .map() ensure clean separation
         
     
-def make_County_City():
+def make_County_City(): # makes county_city file
 
     county_city_dict = defaultdict(set)
     for entry in processing_dict:
@@ -183,10 +187,11 @@ def make_County_City():
             slugText = ""
             # Make slugs for each entry
             slugText = (slugFormat(county)+'-'+slugFormat(state)) # May not be getting the correct state at runtime
+            
             writer.writerow([county,'; '.join( map(str, sorted(cities) ) ) ])  #.join() and .map() ensure clean separation
 
 
-def make_City_Cemtery():
+def make_City_Cemtery(): # makes city_cemetery file
 
     city_cemetery_dict = defaultdict(set)
     for entry in processing_dict:
@@ -204,12 +209,14 @@ def make_City_Cemtery():
         writer = csv.writer(outfile)
         writer.writerow(['City', 'Cemetery'])
         for city, cemeteries in city_cemetery_dict.items(): 
+            
             # Check if parameters are not blank strings...?
             slugText = ""  
             slugText = (slugFormat(city) + '-' + slugFormat(county) + '-' + slugFormat(state) )  # May not be getting the correct county at runtime
             
             writer.writerow([city, '; '.join(map(str, sorted(cemeteries)) )]) #.join() and .map() ensure clean separation
 
+# Main:
 make_State_County() 
 make_County_City() 
 make_City_Cemtery()
