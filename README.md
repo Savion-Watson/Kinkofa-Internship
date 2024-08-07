@@ -2,7 +2,7 @@
 During my internship at Kinkofa, I was told the company was need of more users to fund future projects, but lacked a strong online presence.  
 They requested a programmatic SEO page made in Webflow that archived historically Black cemeteries and demonstrated the functionality of a future app: Black Cemeteries.  
 
-_See the page here: https://kinkofa-2024.webflow.io/_
+_See the page here: https://blackcemeteries.kinkofa.com/_
 
 To create more dynamic functionality and work around Webflow's limitations, I created many custom HTML and JavaScript component such as... 
 * Color-changing tags 
