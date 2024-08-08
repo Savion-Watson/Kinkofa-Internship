@@ -48,17 +48,16 @@ To complete this project I...
 Once the page was finished, I was able to archive... 
 * 200+ cemeteries 
 * 100+ cities 
-* 60+ Counties  
+* 60+ Counties
+* Preserved historical data from link rot, enabling Black families and researchers to access valuable ancestral information.
+* Saved Kinkofa approximately 187.5-281.25 hours of development time, translating to an estimated $9,375-$14,062.5 in development costs.
+* Avoided spending approximately $2,250 on third-party tools by building custom components.
 
 Additionally I ...
 * Developed and implemented a full-stack programmatic SEO solution within Webflow, optimizing user experience and improving brand visibility.
 * Created categorical pages comparable to competitors like Findagrave.com and Familysearch.com.
-* Custom-built and integrated multiple components using HTML, CSS, JavaScript, enhancing the site’s functionality beyond Webflow's native capabilities.
 * Wrote Python scripts for data categorization, improving SEO optimization and ensuring data integrity.
-* Saved Kinkofa approximately 187.5-281.25 hours of development time, translating to an estimated $9,375-$14,062.5 in development costs.
-* Avoided spending approximately $2,250 on third-party tools by building custom components.
-* Preserved historical data from link rot, enabling Black families and researchers to access valuable ancestral information.
-* Created and documented a SQL database to store genealogy data, ensuring interoperability between the firm’s apps and determined the design of the SEO pages
-* Informed the Back-End team on how to efficiently scrape websites and connect existing data to the new PPE system
+* Created and documented a SQL database to store genealogy data, ensuring interoperability between the firm’s apps and determined the design of the SEO pages.
+* Informed the Back-End team on how to efficiently scrape websites and connect existing data to the new PPE system.
 
 
