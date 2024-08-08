@@ -1,8 +1,15 @@
 # Black Cemeteries SEO Code 
+[![Kinkofa-Logo-FullColor(1)](https://github.com/user-attachments/assets/bf3c03de-d434-4abc-9dcc-ea3f9198e4fa)](https://kinkofa.com/)
+
 During my internship at Kinkofa, I was told the company was need of more users to fund future projects, but lacked a strong online presence.  
 They requested a programmatic SEO page made in Webflow that archived historically Black cemeteries and demonstrated the functionality of a future app: Black Cemeteries.  
 
 _See the page here: https://blackcemeteries.kinkofa.com/_
+
+
+[![Screenshot 2024-08-08 102829](https://github.com/user-attachments/assets/4cc4a53b-ecc2-43b0-ae61-e75ea19628a6)](https://blackcemeteries.kinkofa.com/)
+
+
 
 To create more dynamic functionality and work around Webflow's limitations, I created many custom HTML and JavaScript component such as... 
 * Color-changing tags 
