@@ -21,6 +21,7 @@ To complete this project I...
 * Drafted the pages and their designs in Figma to gauge feedback from staff 
 * Created each webpage from scratch based on designs.
 * Ensured the pages were responsive by adjusting layouts and styles on each breakpoint
+* Assisted back-end staff in cleaning data and proposed additional fields to maximize SEO potential.
 * Helped the back-end staff clean data and suggested additional fields to maximize SEO potential 
 * Worked around engine limitations by embedding custom components made with HTML, CSS and JavaScript such as 
 * Meet with staff and other interns on a weekly basis to garner feedback 
@@ -34,8 +35,9 @@ Once the page was finished, I was able to archive...
 * 100+ cities 
 * 60+ Counties  
 
-In addition I was able to... 
-* Made categorical pages comparable to competitors such as Findagrave.com and Familysearch.com
-* Preserve cemetery data that would have been lost from aging websites 
-* Save Kinkofa money with custom components that would have been spent on 3rd party add-ons
+Additionally I ...
+* Created categorical pages comparable to competitors like Findagrave.com and Familysearch.com.
+* Preserved cemetery data that might have been lost from aging websites. (Protected valuable historical data from link rot, ensuring that future generations of Black families and researchers can access this information.)
+* Saved Kinkofa approximately 187.5-281.25 hours of development time, translating to an estimated $9,375-$14,062.5 in development costs.
+* Avoided spending approximately $2,250 on third-party tools by building custom HTML, CSS, and JavaScript components.
 
