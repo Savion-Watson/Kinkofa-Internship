@@ -38,8 +38,8 @@ To complete this project I...
 * Ensured the pages were responsive by adjusting layouts and styles on each breakpoint
 * Assisted back-end staff in cleaning data and proposed additional fields to maximize SEO potential.
 * Helped the back-end staff clean data and suggested additional fields to maximize SEO potential 
-* Worked around engine limitations by embedding custom components
-* Meet with staff and other interns on a weekly basis to garner feedback 
+* Embedded custom components made with HTML, CSS, and JavaScript to work around engine limitations.
+* Met with staff and other interns on a weekly basis to garner feedback 
 * Quickly found fixes for bugs using online documentation and own experimentation 
 * Clearly communicated potential issues the project had with staff and discussed pragmatic solutions 
 
