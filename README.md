@@ -3,7 +3,7 @@
 
 During my internship at kinkofa, I focused on enhancing the company's online presence to attract more users. To achieve this, I developed programmatic SEO pages in Webflow that archives historically Black cemeteries and demonstrates the functionality of kinkofa’s forthcoming app: Black Cemeteries. 
 
-_See the project here: https://blackcemeteries.kinkofa.com/_
+_See the project here: https://blackcemeteries.webflow.io/_
 
 
 [![Screenshot 2024-08-08 102829](https://github.com/user-attachments/assets/4cc4a53b-ecc2-43b0-ae61-e75ea19628a6)](https://blackcemeteries.kinkofa.com/)
